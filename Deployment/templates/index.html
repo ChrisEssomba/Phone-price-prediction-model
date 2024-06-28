@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <!--From https://codepen.io/frytyler/pen/EGdtg-->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Phone price prediction</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Pacifico"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Arimo"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hind:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  </head>
+
+  <body>
+      <div class="login">
+      
+    
+      <h1>Tool for mobile price prediction</h1>
+
+      <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('predict')}}"method="post">
+        <!-- Numeric Input Fields -->
+        <input type="number" name="screen_size" placeholder="screen_size" required="required" />
+        <input type="number" name="rear_camera_mp" placeholder="Rear Camera (MP)" required="required" />
+        <input type="number" name="front_camera_mp" placeholder="Front Camera (MP)" required="required" />
+        <input type="number" name="internal_memory" placeholder="Internal Memory (GB)" required="required" />
+        <input type="number" name="ram" placeholder="RAM (GB)" required="required"/>
+        <input type="number" name="battery_power" placeholder="Battery Power (mAh)" required="required"/>
+        <!--<input type="number" name="weight" placeholder="Weight (g)" required="required"/>-->
+        <input type="number" name="release_year" placeholder="Release Year" required="required"/>
+        <input type="number" name="days_used" placeholder="Days Used" required="required"/>
+        <input type="number" name="normalized_new_price" placeholder="Normalized New Price" required="required"/>
+  
+        
+        <!-- Categorical Dropdowns -->
+         <!-- We use the select option to allow user to select his mobile brand based on the one available-->
+        <div class="form-group">
+            <label for="device_brand_encoded">Device Brand:</label>
+            <select id="device_brand_encoded" name="device_brand_encoded">
+                <option value="Honor">Honor</option>
+                <option value="Others">Others</option>
+                <option value="HTC">HTC</option>
+                <option value="Huawei">Huawei</option>
+                <option value="Infinix">Infinix</option>
+                <option value="Lava">Lava</option>
+                <option value="Lenovo">Lenovo</option>
+                <option value="LG">LG</option>
+                <option value="Meizu">Meizu</option>
+                <option value="Micromax">Micromax</option>
+                <option value="Motorola">Motorola</option>
+                <option value="Nokia">Nokia</option>
+                <option value="OnePlus">OnePlus</option>
+                <option value="Oppo">Oppo</option>
+                <option value="Realme">Realme</option>
+                <option value="Samsung">Samsung</option>
+                <option value="Vivo">Vivo</option>
+                <option value="Xiaomi">Xiaomi</option>
+                <option value="ZTE">ZTE</option>
+                <option value="Apple">Apple</option>
+                <option value="Asus">Asus</option>
+                <option value="Coolpad">Coolpad</option>
+                <option value="Acer">Acer</option>
+                <option value="Alcatel">Alcatel</option>
+                <option value="BlackBerry">BlackBerry</option>
+                <option value="Celkon">Celkon</option>
+                <option value="Gionee">Gionee</option>
+                <option value="Google">Google</option>
+                <option value="Karbonn">Karbonn</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="Panasonic">Panasonic</option>
+                <option value="Sony">Sony</option>
+                <option value="Spice">Spice</option>
+                <option value="XOLO">XOLO</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="4g">4G Support:</label>
+            <select id="4g" name="4g">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="5g">5G Support:</label>
+            <select id="5g" name="5g">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit">Predict</button>
+        </div>
+    </form>
+
+      <br />
+      <br />
+      {{ prediction_text }}
+    </div>
+  </body>
+  </body>
+</html>
+
+
